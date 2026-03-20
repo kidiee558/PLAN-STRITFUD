@@ -2,6 +2,14 @@ export default {
   name: 'menuSection',
   title: 'Menu Section',
   type: 'document',
+  initialValue: {
+    category: 'KEBAB W BUŁCE',
+    items: [
+      { nazwa: 'Kebab Klasyczny', opis: 'Mięso kraftowe, świeże warzywa, autorskie sosy', cena: '25 zł' },
+      { nazwa: 'Kebab Serowy', opis: 'Mięso kraftowe, dużo sera, świeże warzywa, autorskie sosy', cena: '28 zł' },
+      { nazwa: 'Kebab Ostry', opis: 'Mięso kraftowe, jalapeno, ostre sosy', cena: '26 zł' }
+    ]
+  },
   fields: [
     {
       name: 'category',
