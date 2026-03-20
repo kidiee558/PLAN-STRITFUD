@@ -1,8 +1,11 @@
 import { motion } from 'motion/react';
 import { ArrowDown, Facebook, Instagram } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { client } from '../sanityClient';
 
 export default function Hero() {
+  const [sanityData, setSanityData] = useState<any>(null);
+  
   const productPool = [
     "https://raw.githubusercontent.com/kidiee558/PLAN-street-food/main/PLAN-sm-produkt-1.jpg",
     "https://raw.githubusercontent.com/kidiee558/PLAN-street-food/main/PLAN-sm-produkt-2.jpg",
@@ -17,6 +20,11 @@ export default function Hero() {
   useEffect(() => {
     const randomIdx = Math.floor(Math.random() * productPool.length);
     setHeroImage(productPool[randomIdx]);
+
+    // Pobieranie danych z Sanity
+    client.fetch(`*[_type == "homepage"][0]`).then((data) => {
+      setSanityData(data);
+    });
   }, []);
 
   return (
@@ -40,9 +48,15 @@ export default function Hero() {
             transition={{ type: "spring", bounce: 0.6, duration: 1 }}
           >
             <h1 className="font-display text-plan-light mb-4 leading-none flex flex-col items-center md:items-start w-full" style={{ textShadow: '4px 4px 0 #2d1642' }}>
-              <span className="text-[11vw] sm:text-[10vw] md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap">TWÓJ NOWY</span>
-              <span className="text-[11vw] sm:text-[10vw] md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap text-plan-purple" style={{ textShadow: '4px 4px 0 #fef8f5' }}>ULUBIONY</span>
-              <span className="text-[11vw] sm:text-[10vw] md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap">STREET FOOD</span>
+              <span className="text-[11vw] sm:text-[10vw] md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap">
+                {sanityData?.title?.split(' ').slice(0, 2).join(' ') || "TWÓJ NOWY"}
+              </span>
+              <span className="text-[11vw] sm:text-[10vw] md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap text-plan-purple" style={{ textShadow: '4px 4px 0 #fef8f5' }}>
+                {sanityData?.title?.split(' ')[2] || "ULUBIONY"}
+              </span>
+              <span className="text-[11vw] sm:text-[10vw] md:text-6xl lg:text-7xl xl:text-8xl whitespace-nowrap">
+                {sanityData?.title?.split(' ').slice(3).join(' ') || "STREET FOOD"}
+              </span>
             </h1>
 
             <a 
@@ -51,7 +65,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="group text-sm sm:text-xl md:text-2xl font-bold text-plan-dark mb-8 bg-white/90 inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-xl transform rotate-2 cartoon-border hover:-translate-y-1 hover:shadow-[8px_8px_0_#2d1642] transition-all mx-auto md:mx-0"
             >
-              <span>📍 Plac handlowy, Dominów, Rynek 4</span>
+              <span>📍 {sanityData?.description || "Plac handlowy, Dominów, Rynek 4"}</span>
               <span className="text-xl sm:text-2xl md:text-3xl group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300">🗺️</span>
             </a>
             
