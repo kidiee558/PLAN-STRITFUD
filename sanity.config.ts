@@ -11,6 +11,7 @@ const defaultDocumentNode = (S: any, { schemaType }: any) => {
       .options({
         url: 'https://plan-stritfud.pages.dev/',
         reload: { button: true },
+        defaultSize: 'desktop', // This helps with side-by-side
       })
       .title('Preview'),
   ]);
