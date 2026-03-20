@@ -1,0 +1,20 @@
+{
+  "links": [
+    {
+      "napis": "Menu",
+      "link": "#menu"
+    },
+    {
+      "napis": "O nas",
+      "link": "#o-nas"
+    },
+    {
+      "napis": "Opinie",
+      "link": "#opinie"
+    },
+    {
+      "napis": "Kontakt",
+      "link": "#kontakt"
+    }
+  ]
+}
