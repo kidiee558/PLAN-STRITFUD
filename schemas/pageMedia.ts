@@ -2,6 +2,10 @@ export default {
   name: 'pageMedia',
   title: 'Strona Media',
   type: 'document',
+  initialValue: {
+    // Note: Sanity doesn't support pre-filling images/files with URLs directly in initialValue
+    // as they require asset references.
+  },
   fields: [
     {
       name: 'heroVideo',
